@@ -78,6 +78,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\GenericRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -105,5 +106,12 @@
       <LastGenOutput>ReportModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SalesStatistics.DAL.Contracts\SalesStatistics.DAL.Contracts.csproj">
+      <Project>{8508c8f0-07b6-493c-a2de-2809e3f4149d}</Project>
+      <Name>SalesStatistics.DAL.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
