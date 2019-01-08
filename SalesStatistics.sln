@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesStatistics.DAL", "Sale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesStatistics.DAL.Contracts", "SalesStatistics.DAL.Contracts\SalesStatistics.DAL.Contracts.csproj", "{8508C8F0-07B6-493C-A2DE-2809E3F4149D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesStatistics.BLL", "SalesStatistics.BLL\SalesStatistics.BLL.csproj", "{08074AA8-0C48-4C30-A30E-1C056747992A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{8508C8F0-07B6-493C-A2DE-2809E3F4149D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8508C8F0-07B6-493C-A2DE-2809E3F4149D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8508C8F0-07B6-493C-A2DE-2809E3F4149D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08074AA8-0C48-4C30-A30E-1C056747992A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08074AA8-0C48-4C30-A30E-1C056747992A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08074AA8-0C48-4C30-A30E-1C056747992A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08074AA8-0C48-4C30-A30E-1C056747992A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
