@@ -42,6 +42,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Service.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SalesStatistics.BLL.Contracts\SalesStatistics.BLL.Contracts.csproj">
+      <Project>{D949811C-700B-4C97-982A-FC40DF33EAE9}</Project>
+      <Name>SalesStatistics.BLL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesStatistics.DAL.Contracts\SalesStatistics.DAL.Contracts.csproj">
+      <Project>{8508C8F0-07B6-493C-A2DE-2809E3F4149D}</Project>
+      <Name>SalesStatistics.DAL.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
