@@ -65,6 +65,8 @@ namespace SalesStatistics.DAL.Models
             _items.Update(entity);
 
             Save();
+
+            //TODO update item id like id = entity.id
         }
 
         #endregion
