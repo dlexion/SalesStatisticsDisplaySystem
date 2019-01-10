@@ -88,6 +88,10 @@ namespace SalesStatistics.BLL.Services
                         }
                     }
                 }
+                else
+                {
+                    throw new ArgumentException("Already exists");
+                }
             }
         }
 
