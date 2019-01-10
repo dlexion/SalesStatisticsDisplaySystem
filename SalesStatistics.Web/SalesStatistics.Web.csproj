@@ -258,6 +258,16 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SalesStatistics.BLL.Contracts\SalesStatistics.BLL.Contracts.csproj">
+      <Project>{d949811c-700b-4c97-982a-fc40df33eae9}</Project>
+      <Name>SalesStatistics.BLL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SalesStatistics.BLL\SalesStatistics.BLL.csproj">
+      <Project>{08074aa8-0c48-4c30-a30e-1c056747992a}</Project>
+      <Name>SalesStatistics.BLL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
