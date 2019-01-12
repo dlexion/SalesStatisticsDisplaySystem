@@ -1,7 +1,6 @@
-﻿using SalesStatistics.DAL.Contracts.DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using SalesStatistics.DataTransferObjects;
 
 namespace SalesStatistics.BLL.Contracts.Interfaces
 {
@@ -37,6 +36,9 @@ namespace SalesStatistics.BLL.Contracts.Interfaces
         IEnumerable<OrderDTO> GetOrdersByManager(int managerId);
         IEnumerable<OrderDTO> GetOrdersByItem(int itemId);
         IEnumerable<OrderDTO> GetOrdersByCustomer(int customerId);
+
+        //IEnumerable<OrderDTO> GetOrdersr(OrdersRequest request);
+
         OrderDTO GetOrderById(int id);
         void RemoveOrder(OrderDTO order);
         void UpdateOrder(OrderDTO order);

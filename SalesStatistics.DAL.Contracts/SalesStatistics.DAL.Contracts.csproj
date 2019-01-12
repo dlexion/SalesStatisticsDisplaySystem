@@ -41,14 +41,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\CustomerDTO.cs" />
-    <Compile Include="DTO\ItemDTO.cs" />
-    <Compile Include="DTO\ManagerDTO.cs" />
-    <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="Interfaces\IGenericRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Interfaces\IUnitOfWorkFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SalesStatistics.DataTransferObjects\SalesStatistics.DataTransferObjects.csproj">
+      <Project>{a330149f-de05-4677-b799-586e7f073d96}</Project>
+      <Name>SalesStatistics.DataTransferObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

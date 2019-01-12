@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using SalesStatistics.BLL.Contracts.Interfaces;
-using SalesStatistics.DAL.Contracts.DTO;
+using SalesStatistics.DataTransferObjects;
 using SalesStatistics.DAL.Contracts.Interfaces;
 
 namespace SalesStatistics.BLL.Services
 {
-    public class Service : IService
+    public class Service //: IService
     {
         private readonly Dictionary<Type, object> _lockers = new Dictionary<Type, object>()
         {

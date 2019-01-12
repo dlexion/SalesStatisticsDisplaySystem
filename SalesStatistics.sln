@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesStatistics.BLL", "Sale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesStatistics.BLL.Contracts", "SalesStatistics.BLL.Contracts\SalesStatistics.BLL.Contracts.csproj", "{D949811C-700B-4C97-982A-FC40DF33EAE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesStatistics.DataTransferObjects", "SalesStatistics.DataTransferObjects\SalesStatistics.DataTransferObjects.csproj", "{A330149F-DE05-4677-B799-586E7F073D96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D949811C-700B-4C97-982A-FC40DF33EAE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D949811C-700B-4C97-982A-FC40DF33EAE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D949811C-700B-4C97-982A-FC40DF33EAE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A330149F-DE05-4677-B799-586E7F073D96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A330149F-DE05-4677-B799-586E7F073D96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A330149F-DE05-4677-B799-586E7F073D96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A330149F-DE05-4677-B799-586E7F073D96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-﻿namespace SalesStatistics.DAL.Contracts.DTO
+﻿namespace SalesStatistics.DataTransferObjects
 {
     public class ItemDTO
     {

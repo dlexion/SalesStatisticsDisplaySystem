@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
+using SalesStatistics.DataTransferObjects;
 using SalesStatistics.DAL;
 using SalesStatistics.DAL.AutoMapperSetup;
-using SalesStatistics.DAL.Contracts.DTO;
 using SalesStatistics.Web.Models.ViewModels;
 
 namespace SalesStatistics.Web

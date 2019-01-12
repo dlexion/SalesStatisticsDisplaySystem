@@ -285,6 +285,10 @@
       <Project>{1EE39E2D-DF4B-4D63-918F-5CE034B6A74C}</Project>
       <Name>SalesStatistics.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SalesStatistics.DataTransferObjects\SalesStatistics.DataTransferObjects.csproj">
+      <Project>{a330149f-de05-4677-b799-586e7f073d96}</Project>
+      <Name>SalesStatistics.DataTransferObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

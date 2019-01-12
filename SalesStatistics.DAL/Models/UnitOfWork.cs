@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq.Expressions;
 using AutoMapper;
-using SalesStatistics.DAL.Contracts.DTO;
+using SalesStatistics.DataTransferObjects;
 using SalesStatistics.DAL.Contracts.Interfaces;
 using SalesStatistics.DAL.Extensions;
 using SalesStatistics.DAL.Repositories;

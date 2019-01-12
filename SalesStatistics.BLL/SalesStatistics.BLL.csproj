@@ -54,6 +54,10 @@
       <Project>{8508C8F0-07B6-493C-A2DE-2809E3F4149D}</Project>
       <Name>SalesStatistics.DAL.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SalesStatistics.DataTransferObjects\SalesStatistics.DataTransferObjects.csproj">
+      <Project>{a330149f-de05-4677-b799-586e7f073d96}</Project>
+      <Name>SalesStatistics.DataTransferObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

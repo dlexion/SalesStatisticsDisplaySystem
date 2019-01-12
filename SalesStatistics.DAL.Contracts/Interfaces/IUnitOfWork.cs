@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using SalesStatistics.DAL.Contracts.DTO;
+using SalesStatistics.DataTransferObjects;
 
 namespace SalesStatistics.DAL.Contracts.Interfaces
 {

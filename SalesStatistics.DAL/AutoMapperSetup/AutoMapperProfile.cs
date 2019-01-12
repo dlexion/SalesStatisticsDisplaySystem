@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using SalesStatistics.DAL.Contracts.DTO;
+using SalesStatistics.DataTransferObjects;
 
 namespace SalesStatistics.DAL.AutoMapperSetup
 {

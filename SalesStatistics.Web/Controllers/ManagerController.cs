@@ -9,8 +9,8 @@ using System.Web.Mvc;
 using AutoMapper;
 using SalesStatistics.BLL.Contracts.Interfaces;
 using SalesStatistics.BLL.Services;
+using SalesStatistics.DataTransferObjects;
 using SalesStatistics.DAL;
-using SalesStatistics.DAL.Contracts.DTO;
 using SalesStatistics.DAL.Models;
 using SalesStatistics.Web.Models.ViewModels;
 
@@ -19,7 +19,7 @@ namespace SalesStatistics.Web.Controllers
     [Authorize]
     public class ManagerController : Controller
     {
-        private readonly IService _service;
+        private readonly Service _service;
 
         public ManagerController()
         {
@@ -35,8 +35,10 @@ namespace SalesStatistics.Web.Controllers
         }
 
         // GET: Manager/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+
             return View();
         }
 
@@ -45,6 +47,7 @@ namespace SalesStatistics.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,LastName")] ManagerViewModel managerViewModel)
         {
             try
@@ -66,6 +69,7 @@ namespace SalesStatistics.Web.Controllers
         }
 
         // GET: Manager/Edit/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
             return View();
@@ -76,6 +80,7 @@ namespace SalesStatistics.Web.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,LastName")] ManagerViewModel managerViewModel)
         {
             try
@@ -97,6 +102,7 @@ namespace SalesStatistics.Web.Controllers
         }
 
         // GET: Manager/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             return View();
@@ -105,6 +111,7 @@ namespace SalesStatistics.Web.Controllers
         // POST: Manager/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
             try
