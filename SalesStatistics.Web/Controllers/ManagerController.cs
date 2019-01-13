@@ -19,7 +19,7 @@ namespace SalesStatistics.Web.Controllers
     [Authorize]
     public class ManagerController : Controller
     {
-        private readonly Service _service;
+        private readonly IService _service;
 
         public ManagerController()
         {
