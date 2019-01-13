@@ -3,9 +3,9 @@ using SalesStatistics.DataTransferObjects;
 
 namespace SalesStatistics.DAL.AutoMapperSetup
 {
-    public class AutoMapperProfile : Profile
+    public class AutoMapperDalProfile : Profile
     {
-        public AutoMapperProfile()
+        public AutoMapperDalProfile()
         {
             CreateMap<Customer, CustomerDTO>();
             CreateMap<CustomerDTO, Customer>()

@@ -56,8 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapperSetup\AutoMapperConfiguration.cs" />
-    <Compile Include="AutoMapperSetup\AutoMapperProfile.cs" />
+    <Compile Include="AutoMapperSetup\AutoMapperDalProfile.cs" />
     <Compile Include="Customer.cs">
       <DependentUpon>ReportModel.tt</DependentUpon>
     </Compile>
