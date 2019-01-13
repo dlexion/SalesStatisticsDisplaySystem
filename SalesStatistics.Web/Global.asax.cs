@@ -28,7 +28,7 @@ namespace SalesStatistics.Web
                 x.CreateMap<ManagerDTO, ManagerViewModel>();
 
                 // Profile with mapping entities to DTO and vice versa
-                x.AddProfile<AutoMapperProfile>();
+                x.AddProfile<AutoMapperDalProfile>();
             });
         }
     }
