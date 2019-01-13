@@ -13,5 +13,23 @@
 }
 
 <div id="managersTable">
-    @Html.Partial("_ManagersTable")
+    @*@Html.Partial("_ManagersTable")*@
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        onManagersTableLoad = function () {
+            $.get('@Url.Action("GetManagers", "Manager")', null,
+                function (data) {
+                    $("#managersTable").html(data);
+                });
+        }
+
+        onManagersTableLoad();
+    </script>
+}
+
+
+

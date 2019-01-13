@@ -29,9 +29,7 @@ namespace SalesStatistics.Web.Controllers
         // GET: Manager
         public ActionResult Index()
         {
-            var items = Mapper.Map<IEnumerable<ManagerViewModel>>(_service.GetAllManagers());
-
-            return View(items);
+            return View();
         }
 
         // GET: Manager/Create
@@ -117,12 +115,20 @@ namespace SalesStatistics.Web.Controllers
             try
             {
                 _service.RemoveManager(_service.GetManagerById(id));
+
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
                 return RedirectToAction("Index");
             }
+        }
+
+        public ActionResult GetManagers()
+        {
+            var items = Mapper.Map<IEnumerable<ManagerViewModel>>(_service.GetAllManagers());
+
+            return PartialView("_ManagersTable", items);
         }
     }
 }

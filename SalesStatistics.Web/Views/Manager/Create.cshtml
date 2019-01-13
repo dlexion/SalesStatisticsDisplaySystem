@@ -32,4 +32,16 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    @*<script type="text/javascript">
+            onCreate = function () {
+                $("form").on("submit", function (e) {
+                    e.preventDefault();
+                    var url = '@Url.Action("Index", "Manager")';
+                    window.location.href = url;
+                });
+            }
+
+            $("#createButton").click(onCreate);
+        </script>*@
 }
