@@ -1,4 +1,6 @@
-﻿@model IEnumerable<SalesStatistics.Web.Models.ViewModels.CustomerViewModel>
+﻿@using SalesStatistics.Web.Models.Requests
+@using SalesStatistics.Web.Models.ViewModels
+@model IEnumerable<SalesStatistics.Web.Models.ViewModels.CustomerViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -13,11 +15,20 @@
     </p>
 }
 
-<div id="customersTable">
-</div>
+    <div id="search" class="form-horizontal">
+        <h4>Search</h4>
+        @Html.Partial("_CustomerFilter", new CustomersRequestViewModel())
+    </div>
+
+    <div id="customersTable">
+        
+    </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/ajax")
 
     <script type="text/javascript">
         onCustomersTableLoad = function () {
@@ -28,5 +39,16 @@
         }
 
         onCustomersTableLoad();
+
+        onSearch = function() {
+            $("form").on("submit", function (e) {
+                e.preventDefault();
+                $.get('@Url.Action("Find", "Customer")', $("form").serialize(), function (data) {
+                    $("#customersTable").html(data)
+                });
+            });
+        }
+
+        $("#searchButton").click(onSearch);
     </script>
 }

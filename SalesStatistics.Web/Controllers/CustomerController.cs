@@ -12,6 +12,7 @@ using SalesStatistics.BLL.Contracts.Requests;
 using SalesStatistics.BLL.Services;
 using SalesStatistics.DataTransferObjects;
 using SalesStatistics.DAL.Models;
+using SalesStatistics.Web.Models.Requests;
 using SalesStatistics.Web.Models.ViewModels;
 
 namespace SalesStatistics.Web.Controllers
@@ -28,6 +29,9 @@ namespace SalesStatistics.Web.Controllers
         // GET: Customer
         public ActionResult Index()
         {
+            var filter = new CustomersRequestViewModel();
+            ViewBag.Filter = filter;
+
             return View();
         }
 
@@ -143,6 +147,17 @@ namespace SalesStatistics.Web.Controllers
             var customers = Mapper.Map<IEnumerable<CustomerViewModel>>(_service.GetCustomers());
 
             return PartialView("_CustomersTable", customers);
+        }
+
+        public ActionResult Find(CustomersRequestViewModel request)
+        {
+            var req = new CustomersRequest()
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName
+            };
+
+            return PartialView("_CustomersTable", Mapper.Map<IEnumerable<CustomerViewModel>>(_service.GetCustomers(req)));
         }
     }
 }

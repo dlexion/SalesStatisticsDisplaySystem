@@ -28,6 +28,9 @@ namespace SalesStatistics.Web
 
             bundles.Add(new ScriptBundle("~/js/required").Include(
                 "~/Scripts/jquery-3.3.1.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/ajax").Include(
+                "~/Scripts/jquery-unobtrusive-ajax.min.js"));
         }
     }
 }
