@@ -66,7 +66,10 @@ namespace SalesStatistics.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
-            return View();
+            int newId = id ?? default(int);
+            var item = Mapper.Map<ManagerViewModel>(_service.GetManagerById(newId));
+
+            return View(item);
         }
 
         [HttpPost]
@@ -96,7 +99,10 @@ namespace SalesStatistics.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
-            return View();
+            int newId = id ?? default(int);
+            var item = Mapper.Map<ManagerViewModel>(_service.GetManagerById(newId));
+
+            return View(item);
         }
 
         // POST: Manager/Delete/5
