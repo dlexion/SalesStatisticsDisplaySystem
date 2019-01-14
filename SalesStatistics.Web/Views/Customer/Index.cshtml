@@ -1,0 +1,29 @@
+﻿@model IEnumerable<SalesStatistics.Web.Models.ViewModels.CustomerViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div id="customersTable">
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        onCustomersTableLoad = function () {
+            $.get('@Url.Action("GetCustomers", "Customer")', null,
+                function (data) {
+                    $("#customersTable").html(data);
+                });
+        }
+
+        onCustomersTableLoad();
+    </script>
+}
