@@ -148,9 +148,32 @@ namespace SalesStatistics.Web.Controllers
 
         public ActionResult Find(OrdersRequestViewModel request)
         {
+            var customerRequest = new CustomersRequest();
+            if (request.CustomersRequest == null)
+            {
+                customerRequest = null;
+            }
+            else
+            {
+                customerRequest.FirstName = request.CustomersRequest.FirstName;
+                customerRequest.LastName = request.CustomersRequest.LastName;
+            }
+
+            var managerRequest = new ManagersRequest();
+            if (request.ManagersRequest == null)
+            {
+                managerRequest = null;
+            }
+            else
+            {
+                managerRequest.LastName = request.ManagersRequest.LastName;
+            }
+
             var orderRequest = new OrdersRequest()
             {
-                Cost = request.Cost
+                Cost = request.Cost,
+                CustomersRequest = customerRequest,
+                ManagersRequest = managerRequest
             };
 
             return PartialView("_OrdersTable",

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
 using SalesStatistics.BLL.Contracts.Interfaces;
 using SalesStatistics.BLL.Contracts.Requests;
+using SalesStatistics.BLL.Extensions;
 using SalesStatistics.DataTransferObjects;
 using SalesStatistics.DAL.Contracts.Interfaces;
 
@@ -60,7 +60,7 @@ namespace SalesStatistics.BLL.Services
 
         public IEnumerable<OrderDTO> GetOrders(OrdersRequest request = null)
         {
-            if (request == null)
+            if (request == null || AreAllPropertiesNull(request))
             {
                 using (var unitOfWork = _factory.GetInstance())
                 {
@@ -69,15 +69,78 @@ namespace SalesStatistics.BLL.Services
 
             }
 
+            Expression<Func<OrderDTO, bool>> finalExpression = null;
+
             if (request.Cost != null)
             {
                 Expression<Func<OrderDTO, bool>> exp = x => x.Cost == request.Cost;
-                using (var unitOfWork = _factory.GetInstance())
+                finalExpression = CombineExpressions(finalExpression, exp);
+            }
+
+            if (request.CustomersRequest != null)
+            {
+                if (request.CustomersRequest.LastName != null)
                 {
-                    return unitOfWork.GetOrders(exp);
+                    Expression<Func<OrderDTO, bool>> exp = x => x.Customer.LastName == request.CustomersRequest.LastName;
+                    finalExpression = CombineExpressions(finalExpression, exp);
+                }
+
+                if (request.CustomersRequest.FirstName != null)
+                {
+                    Expression<Func<OrderDTO, bool>> exp = x => x.Customer.FirstName == request.CustomersRequest.FirstName;
+                    finalExpression = CombineExpressions(finalExpression, exp);
                 }
             }
-            // TODO
+
+
+            if (request.ManagersRequest != null && request.ManagersRequest.LastName != null)
+            {
+                Expression<Func<OrderDTO, bool>> exp = x => x.Manager.LastName == request.ManagersRequest.LastName;
+                finalExpression = CombineExpressions(finalExpression, exp);
+            }
+
+            using (var unitOfWork = _factory.GetInstance())
+            {
+                return unitOfWork.GetOrders(finalExpression);
+            }
+        }
+
+        private bool AreAllPropertiesNull(OrdersRequest request)
+        {
+            if (request.Cost == null &&
+                request.CustomersRequest == null &&
+                request.ManagersRequest == null)
+            {
+                return true;
+            }
+            if (request.CustomersRequest != null &&
+                     request.ManagersRequest != null &&
+                     request.Cost == null &&
+                     request.CustomersRequest.LastName == null &&
+                     request.CustomersRequest.FirstName == null &&
+                     request.ManagersRequest.LastName == null)
+                return true;
+
+            return false;
+        }
+
+        private Expression<Func<OrderDTO, bool>> CombineExpressions(Expression<Func<OrderDTO, bool>> ex1, Expression<Func<OrderDTO, bool>> ex2)
+        {
+            if (ex1 != null && ex2 != null)
+            {
+                return ex1.Or(ex2);
+            }
+
+            if (ex1 != null)
+            {
+                return ex1;
+            }
+
+            if (ex2 != null)
+            {
+                return ex2;
+            }
+
             return null;
         }
     }
