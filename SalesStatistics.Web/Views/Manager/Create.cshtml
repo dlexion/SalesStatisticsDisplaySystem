@@ -34,7 +34,7 @@
     @Scripts.Render("~/bundles/jqueryval")
 
     @*<script type="text/javascript">
-            onCreate = function () {
+            onCreateManager = function () {
                 $("form").on("submit", function (e) {
                     e.preventDefault();
                     var url = '@Url.Action("Index", "Manager")';
@@ -42,6 +42,6 @@
                 });
             }
 
-            $("#createButton").click(onCreate);
+            $("#createButton").click(onCreateManager);
         </script>*@
 }

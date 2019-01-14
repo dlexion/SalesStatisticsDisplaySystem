@@ -26,8 +26,27 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
+            <input id="deleteButton" type="submit" value="Delete" class="btn btn-default" /> |
             @Html.ActionLink("Back to List", "Index")
         </div>
     }
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        onDeleteManager = function() {
+            $("form").on("submit", function (e) {
+                e.preventDefault();
+                $.post('@Url.Action("Delete", "Manager")', $("form").serialize(), function (data) {
+                    var url = '@Url.Action("Index", "Manager")';
+                    window.location.href = url;
+                });
+            });
+        }
+
+        $("#deleteButton").click(onDeleteManager);
+    </script>
+}
+

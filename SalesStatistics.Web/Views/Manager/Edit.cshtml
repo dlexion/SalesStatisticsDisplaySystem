@@ -34,11 +34,17 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
-    <script type="text/javascript">
-        onSave = function() {
-            var url = @Url.Action("Index", "Manager");
-            window.location.href = url;
+    @*<script type="text/javascript">
+        onSaveManager = function() {
+            $("form").on("submit", function (e) {
+                e.preventDefault();
+                $.post('@Url.Action("Edit", "Manager")', $("form").serialize(), function (data) {
+                    alert("gg");
+                    var url = '@Url.Action("Index", "Manager")';
+                    //window.location.href = url;
+                });
+            });
         }
-        $("#saveButton").click(onSave);
-    </script>
+        $("#saveButton").click(onSaveManager);
+    </script>*@
 }
