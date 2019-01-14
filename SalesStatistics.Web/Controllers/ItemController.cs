@@ -138,5 +138,12 @@ namespace SalesStatistics.Web.Controllers
                 return View(Mapper.Map<ItemViewModel>(_service.GetItemById(id)));
             }
         }
+
+        public ActionResult GetItems()
+        {
+            var items = Mapper.Map<IEnumerable<ItemViewModel>>(_service.GetAllItems());
+
+            return PartialView("_ItemsTable", items);
+        }
     }
 }
