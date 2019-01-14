@@ -14,11 +14,11 @@ namespace SalesStatistics.Web.Controllers
     [Authorize]
     public class ItemController : Controller
     {
-        private readonly IService _service;
+        private readonly IItemService _service;
 
         public ItemController()
         {
-            _service = new Service(new UnitOfWorkFactory());
+            _service = new ItemService(new UnitOfWorkFactory());
         }
         // GET: Item
         public ActionResult Index()
@@ -44,7 +44,7 @@ namespace SalesStatistics.Web.Controllers
                     return View(itemViewModel);
                 }
 
-                _service.AddItem(Mapper.Map<ItemDTO>(itemViewModel));
+                _service.Add(Mapper.Map<ItemDTO>(itemViewModel));
 
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace SalesStatistics.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var itemViewModel = Mapper.Map<ItemViewModel>(_service.GetItemById((int) id));
+            var itemViewModel = Mapper.Map<ItemViewModel>(_service.GetById((int) id));
 
             if (itemViewModel == null)
             {
@@ -85,7 +85,7 @@ namespace SalesStatistics.Web.Controllers
                     return View(itemViewModel);
                 }
 
-                _service.UpdateItem(Mapper.Map<ItemDTO>(itemViewModel));
+                _service.Update(Mapper.Map<ItemDTO>(itemViewModel));
 
                 return RedirectToAction("Index");
             }
@@ -106,7 +106,7 @@ namespace SalesStatistics.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var itemViewModel = Mapper.Map<ItemViewModel>(_service.GetItemById((int) id));
+            var itemViewModel = Mapper.Map<ItemViewModel>(_service.GetById((int) id));
 
             if (itemViewModel == null)
             {
@@ -122,7 +122,7 @@ namespace SalesStatistics.Web.Controllers
         {
             try
             {
-                _service.RemoveItem(_service.GetItemById(id));
+                _service.Remove(_service.GetById(id));
 
                 return RedirectToAction("Index");
             }
@@ -130,13 +130,13 @@ namespace SalesStatistics.Web.Controllers
             {
                 ModelState.AddModelError(string.Empty, e.Message);
 
-                return View(Mapper.Map<ItemViewModel>(_service.GetItemById(id)));
+                return View(Mapper.Map<ItemViewModel>(_service.GetById(id)));
             }
         }
 
         public ActionResult GetItems()
         {
-            var items = Mapper.Map<IEnumerable<ItemViewModel>>(_service.GetAllItems());
+            var items = Mapper.Map<IEnumerable<ItemViewModel>>(_service.GetItems());
 
             return PartialView("_ItemsTable", items);
         }

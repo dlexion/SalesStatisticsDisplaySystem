@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using SalesStatistics.BLL.Contracts.Interfaces;
+using SalesStatistics.BLL.Contracts.Requests;
 using SalesStatistics.BLL.Services;
 using SalesStatistics.DataTransferObjects;
 using SalesStatistics.DAL.Models;
@@ -18,11 +19,11 @@ namespace SalesStatistics.Web.Controllers
     [Authorize]
     public class CustomerController : Controller
     {
-        private readonly IService _service;
+        private readonly ICustomerService _service;
 
         public CustomerController()
         {
-            _service = new Service(new UnitOfWorkFactory());
+            _service = new CustomerService(new UnitOfWorkFactory());
         }
         // GET: Customer
         public ActionResult Index()
@@ -47,7 +48,7 @@ namespace SalesStatistics.Web.Controllers
                     return View(customerViewModel);
                 }
 
-                _service.AddCustomer(Mapper.Map<CustomerDTO>(customerViewModel));
+                _service.Add(Mapper.Map<CustomerDTO>(customerViewModel));
 
                 return RedirectToAction("Index");
             }
@@ -68,7 +69,7 @@ namespace SalesStatistics.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var customerViewModel = Mapper.Map<CustomerViewModel>(_service.GetCustomerById((int)id));
+            var customerViewModel = Mapper.Map<CustomerViewModel>(_service.GetById((int)id));
 
             if (customerViewModel == null)
             {
@@ -88,7 +89,7 @@ namespace SalesStatistics.Web.Controllers
                     return View(customerViewModel);
                 }
 
-                _service.UpdateCustomer(Mapper.Map<CustomerDTO>(customerViewModel));
+                _service.Update(Mapper.Map<CustomerDTO>(customerViewModel));
 
                 return RedirectToAction("Index");
             }
@@ -109,7 +110,7 @@ namespace SalesStatistics.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var customerViewModel = Mapper.Map<CustomerViewModel>(_service.GetCustomerById((int)id));
+            var customerViewModel = Mapper.Map<CustomerViewModel>(_service.GetById((int)id));
 
             if (customerViewModel == null)
             {
@@ -125,7 +126,7 @@ namespace SalesStatistics.Web.Controllers
         {
             try
             {
-                _service.RemoveCustomer(_service.GetCustomerById(id));
+                _service.Remove(_service.GetById(id));
 
                 return RedirectToAction("Index");
             }
@@ -133,13 +134,13 @@ namespace SalesStatistics.Web.Controllers
             {
                 ModelState.AddModelError(string.Empty, e.Message);
 
-                return View(Mapper.Map<CustomerViewModel>(_service.GetCustomerById(id)));
+                return View(Mapper.Map<CustomerViewModel>(_service.GetById(id)));
             }
         }
 
         public ActionResult GetCustomers()
         {
-            var customers = Mapper.Map<IEnumerable<CustomerViewModel>>(_service.GetAllCustomers());
+            var customers = Mapper.Map<IEnumerable<CustomerViewModel>>(_service.GetCustomers());
 
             return PartialView("_CustomersTable", customers);
         }

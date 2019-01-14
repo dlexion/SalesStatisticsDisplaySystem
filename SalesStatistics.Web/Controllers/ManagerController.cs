@@ -19,11 +19,11 @@ namespace SalesStatistics.Web.Controllers
     [Authorize]
     public class ManagerController : Controller
     {
-        private readonly IService _service;
+        private readonly IManagerService _service;
 
         public ManagerController()
         {
-            _service = new Service(new UnitOfWorkFactory());
+            _service = new ManagerService(new UnitOfWorkFactory());
         }
 
         // GET: Manager
@@ -50,7 +50,7 @@ namespace SalesStatistics.Web.Controllers
                     return View(managerViewModel);
                 }
 
-                _service.AddManager(Mapper.Map<ManagerDTO>(managerViewModel));
+                _service.Add(Mapper.Map<ManagerDTO>(managerViewModel));
 
                 return RedirectToAction("Index");
             }
@@ -72,7 +72,7 @@ namespace SalesStatistics.Web.Controllers
             }
 
             int newId = id ?? default(int);
-            var manager = Mapper.Map<ManagerViewModel>(_service.GetManagerById(newId));
+            var manager = Mapper.Map<ManagerViewModel>(_service.GetById(newId));
 
             if (manager == null)
             {
@@ -92,7 +92,7 @@ namespace SalesStatistics.Web.Controllers
                     return View(managerViewModel);
                 }
 
-                _service.UpdateManager(Mapper.Map<ManagerDTO>(managerViewModel));
+                _service.Update(Mapper.Map<ManagerDTO>(managerViewModel));
 
                 return RedirectToAction("Index");
             }
@@ -109,7 +109,7 @@ namespace SalesStatistics.Web.Controllers
         public ActionResult Delete(int? id)
         {
             int newId = id ?? default(int);
-            var item = Mapper.Map<ManagerViewModel>(_service.GetManagerById(newId));
+            var item = Mapper.Map<ManagerViewModel>(_service.GetById(newId));
 
             return View(item);
         }
@@ -121,7 +121,7 @@ namespace SalesStatistics.Web.Controllers
         {
             try
             {
-                _service.RemoveManager(_service.GetManagerById(id));
+                _service.Remove(_service.GetById(id));
 
                 return RedirectToAction("Index");
             }
@@ -135,14 +135,15 @@ namespace SalesStatistics.Web.Controllers
 
         public ActionResult GetManagers()
         {
-            var items = Mapper.Map<IEnumerable<ManagerViewModel>>(_service.GetAllManagers());
+            var items = Mapper.Map<IEnumerable<ManagerViewModel>>(_service.GetManagers());
 
             return PartialView("_ManagersTable", items);
         }
 
         public JsonResult GetChartData()
         {
-            var result = Mapper.Map<List<OrderDTO>>(_service.GetAllOrders())
+            var orderService = new OrderService(new UnitOfWorkFactory());
+            var result = Mapper.Map<List<OrderDTO>>(orderService.GetOrders())
                 .GroupBy(x => x.Manager.LastName)
                 .Select(y => new object[] { y.Key, y.Count() }).ToArray();
 

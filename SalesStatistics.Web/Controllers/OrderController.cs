@@ -14,11 +14,11 @@ namespace SalesStatistics.Web.Controllers
     [Authorize]
     public class OrderController : Controller
     {
-        private readonly IService _service;
+        private readonly IOrderService _service;
 
         public OrderController()
         {
-            _service = new Service(new UnitOfWorkFactory());
+            _service = new OrderService(new UnitOfWorkFactory());
         }
 
         // GET: Order
@@ -45,7 +45,7 @@ namespace SalesStatistics.Web.Controllers
                     return View(orderViewModel);
                 }
 
-                _service.AddOrder(Mapper.Map<OrderDTO>(orderViewModel));
+                _service.Add(Mapper.Map<OrderDTO>(orderViewModel));
 
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace SalesStatistics.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var orderViewModel = Mapper.Map<OrderViewModel>(_service.GetOrderById((int)id));
+            var orderViewModel = Mapper.Map<OrderViewModel>(_service.GetById((int)id));
 
             if (orderViewModel == null)
             {
@@ -87,7 +87,7 @@ namespace SalesStatistics.Web.Controllers
                     return View(orderViewModel);
                 }
 
-                _service.UpdateOrder(Mapper.Map<OrderDTO>(orderViewModel));
+                _service.Update(Mapper.Map<OrderDTO>(orderViewModel));
 
                 return RedirectToAction("Index");
             }
@@ -108,7 +108,7 @@ namespace SalesStatistics.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var orderViewModel = Mapper.Map<OrderViewModel>(_service.GetOrderById((int)id));
+            var orderViewModel = Mapper.Map<OrderViewModel>(_service.GetById((int)id));
 
             if (orderViewModel == null)
             {
@@ -125,7 +125,7 @@ namespace SalesStatistics.Web.Controllers
         {
             try
             {
-                _service.RemoveOrder(_service.GetOrderById(id));
+                _service.Remove(_service.GetById(id));
 
                 return RedirectToAction("Index");
             }
@@ -133,13 +133,13 @@ namespace SalesStatistics.Web.Controllers
             {
                 ModelState.AddModelError(string.Empty, e.Message);
 
-                return View(Mapper.Map<OrderViewModel>(_service.GetOrderById(id)));
+                return View(Mapper.Map<OrderViewModel>(_service.GetById(id)));
             }
         }
 
         public ActionResult GetOrders()
         {
-            var customers = Mapper.Map<IEnumerable<OrderViewModel>>(_service.GetAllOrders());
+            var customers = Mapper.Map<IEnumerable<OrderViewModel>>(_service.GetOrders());
 
             return PartialView("_OrdersTable", customers);
         }
