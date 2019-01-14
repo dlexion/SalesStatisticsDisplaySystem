@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<SalesStatistics.Web.Models.ViewModels.ManagerViewModel>
 
+
 <table class="table">
     <tr>
         <th>
@@ -17,8 +18,8 @@
             @if (Roles.IsUserInRole("Admin"))
             {
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-default" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-default" })
                 </td>
             }
         </tr>
