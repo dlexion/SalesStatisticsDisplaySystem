@@ -1,0 +1,28 @@
+﻿<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+
+        data.addColumn('string', 'LastName');
+        data.addColumn('number', 'Orders');
+
+        $.get('@Url.Action("GetChartData", "Manager")', null,
+                    function (dataJSON) {
+                        data.addRows(dataJSON);
+
+                        var options = {
+                            'title': 'Number of handled orders',
+                            'width': 400,
+                            'height': 300
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                        chart.draw(data, options);
+                    });
+    };
+</script>
