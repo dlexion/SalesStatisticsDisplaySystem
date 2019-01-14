@@ -13,6 +13,9 @@ namespace SalesStatistics.Web.AutoMapperSetup
 
             CreateMap<ItemViewModel, ItemDTO>();
             CreateMap<ItemDTO, ItemViewModel>();
+
+            CreateMap<CustomerDTO, CustomerViewModel>();
+            CreateMap<CustomerViewModel, CustomerDTO>();
         }
     }
 }
