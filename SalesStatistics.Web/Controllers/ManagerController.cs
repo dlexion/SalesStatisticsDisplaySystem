@@ -124,5 +124,14 @@ namespace SalesStatistics.Web.Controllers
 
             return PartialView("_ManagersTable", items);
         }
+
+        public JsonResult GetChartData()
+        {
+            var result = Mapper.Map<List<OrderDTO>>(_service.GetAllOrders())
+                .GroupBy(x => x.Manager.LastName)
+                .Select(y => new object[] { y.Key, y.Count() }).ToArray();
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
