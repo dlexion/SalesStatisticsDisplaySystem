@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using SalesStatistics.BLL.Contracts.Interfaces;
 using SalesStatistics.BLL.Contracts.Requests;
 using SalesStatistics.DataTransferObjects;
@@ -66,6 +67,15 @@ namespace SalesStatistics.BLL.Services
                     return unitOfWork.GetOrders();
                 }
 
+            }
+
+            if (request.Cost != null)
+            {
+                Expression<Func<OrderDTO, bool>> exp = x => x.Cost == request.Cost;
+                using (var unitOfWork = _factory.GetInstance())
+                {
+                    return unitOfWork.GetOrders(exp);
+                }
             }
             // TODO
             return null;

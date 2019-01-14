@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SalesStatistics.Web.Models.ViewModels.OrderViewModel>
+﻿@using SalesStatistics.Web.Models.Requests
+@model IEnumerable<SalesStatistics.Web.Models.ViewModels.OrderViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -11,6 +12,15 @@
         @Html.ActionLink("Create New", "Create")
     </p>
 }
+
+<div id="search" class="form-horizontal">
+    <h4>Search</h4>
+    @Html.Partial("_OrderFilter", new OrdersRequestViewModel()
+    {
+        ManagersRequest = new ManagersRequestViewModel(),
+        CustomersRequest = new CustomersRequestViewModel()
+    })
+</div>
 
 <div id="ordersTable">
 </div>
@@ -27,5 +37,16 @@
         }
 
         onOrdersTableLoad();
+
+        onSearch = function() {
+            $("form").on("submit", function (e) {
+                e.preventDefault();
+                $.get('@Url.Action("Find", "Order")', $("form").serialize(), function (data) {
+                    $("#ordersTable").html(data);
+                });
+            });
+        }
+
+        $("#searchButton").click(onSearch);
     </script>
 }

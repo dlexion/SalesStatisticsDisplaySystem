@@ -4,9 +4,11 @@ using System.Net;
 using System.Web.Mvc;
 using AutoMapper;
 using SalesStatistics.BLL.Contracts.Interfaces;
+using SalesStatistics.BLL.Contracts.Requests;
 using SalesStatistics.BLL.Services;
 using SalesStatistics.DataTransferObjects;
 using SalesStatistics.DAL.Models;
+using SalesStatistics.Web.Models.Requests;
 using SalesStatistics.Web.Models.ViewModels;
 
 namespace SalesStatistics.Web.Controllers
@@ -142,6 +144,17 @@ namespace SalesStatistics.Web.Controllers
             var customers = Mapper.Map<IEnumerable<OrderViewModel>>(_service.GetOrders());
 
             return PartialView("_OrdersTable", customers);
+        }
+
+        public ActionResult Find(OrdersRequestViewModel request)
+        {
+            var orderRequest = new OrdersRequest()
+            {
+                Cost = request.Cost
+            };
+
+            return PartialView("_OrdersTable",
+                Mapper.Map<IEnumerable<OrderViewModel>>(_service.GetOrders(orderRequest)));
         }
     }
 }
