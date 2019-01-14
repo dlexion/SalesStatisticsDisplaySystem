@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SalesStatistics.Web.Models.ViewModels.ManagerViewModel>
+﻿@using SalesStatistics.Web.Models.Requests
+@model IEnumerable<SalesStatistics.Web.Models.ViewModels.ManagerViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,10 +13,15 @@
     </p>
 }
 
+<div id="search" class="form-horizontal">
+    <h4>Search</h4>
+    @Html.Partial("_ManagerFilter", new ManagersRequestViewModel())
+</div>
+
 <div id="managersTable">
 </div>
 
-<br/>
+<br />
 
 <div id="chart_div">
     @Html.Partial("_ManagerChart");
@@ -33,6 +39,18 @@
         }
 
         onManagersTableLoad();
+
+        onSearch = function() {
+            $("form").on("submit", function (e) {
+                e.preventDefault();
+                $.get('@Url.Action("Find", "Manager")', $("form").serialize(), function (data) {
+                    $("#managersTable").html(data);
+                });
+            });
+        }
+
+        $("#searchButton").click(onSearch);
+
     </script>
 }
 

@@ -151,13 +151,14 @@ namespace SalesStatistics.Web.Controllers
 
         public ActionResult Find(CustomersRequestViewModel request)
         {
-            var req = new CustomersRequest()
+            var customerRequest = new CustomersRequest()
             {
                 FirstName = request.FirstName,
                 LastName = request.LastName
             };
 
-            return PartialView("_CustomersTable", Mapper.Map<IEnumerable<CustomerViewModel>>(_service.GetCustomers(req)));
+            return PartialView("_CustomersTable",
+                Mapper.Map<IEnumerable<CustomerViewModel>>(_service.GetCustomers(customerRequest)));
         }
     }
 }

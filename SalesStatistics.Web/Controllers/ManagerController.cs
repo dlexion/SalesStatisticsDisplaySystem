@@ -8,10 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using SalesStatistics.BLL.Contracts.Interfaces;
+using SalesStatistics.BLL.Contracts.Requests;
 using SalesStatistics.BLL.Services;
 using SalesStatistics.DataTransferObjects;
 using SalesStatistics.DAL;
 using SalesStatistics.DAL.Models;
+using SalesStatistics.Web.Models.Requests;
 using SalesStatistics.Web.Models.ViewModels;
 
 namespace SalesStatistics.Web.Controllers
@@ -148,6 +150,17 @@ namespace SalesStatistics.Web.Controllers
                 .Select(y => new object[] { y.Key, y.Count() }).ToArray();
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Find(ManagersRequestViewModel request)
+        {
+            var customerRequest = new ManagersRequest()
+            {
+                LastName = request.LastName
+            };
+
+            return PartialView("_ManagersTable",
+                Mapper.Map<IEnumerable<ManagerViewModel>>(_service.GetManagers(customerRequest)));
         }
     }
 }

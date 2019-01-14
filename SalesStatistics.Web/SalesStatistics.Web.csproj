@@ -194,6 +194,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Requests\CustomersRequestViewModel.cs" />
+    <Compile Include="Models\Requests\ManagersRequestViewModel.cs" />
     <Compile Include="Models\ViewModels\CustomerViewModel.cs" />
     <Compile Include="Models\ViewModels\ItemViewModel.cs" />
     <Compile Include="Models\ViewModels\ManagerViewModel.cs" />
@@ -283,6 +284,7 @@
     <Content Include="Views\Order\_OrderCreate.cshtml" />
     <Content Include="Views\Order\_OrdersTable.cshtml" />
     <Content Include="Views\Customer\_CustomerFilter.cshtml" />
+    <Content Include="Views\Manager\_ManagerFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

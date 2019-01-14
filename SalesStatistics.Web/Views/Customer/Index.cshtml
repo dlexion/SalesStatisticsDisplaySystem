@@ -44,7 +44,7 @@
             $("form").on("submit", function (e) {
                 e.preventDefault();
                 $.get('@Url.Action("Find", "Customer")', $("form").serialize(), function (data) {
-                    $("#customersTable").html(data)
+                    $("#customersTable").html(data);
                 });
             });
         }
