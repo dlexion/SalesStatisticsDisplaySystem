@@ -36,15 +36,10 @@ namespace SalesStatistics.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-
             return View();
         }
 
-        // POST: Manager/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public ActionResult Create([Bind(Include = "Id,LastName")] ManagerViewModel managerViewModel)
         {
@@ -61,7 +56,8 @@ namespace SalesStatistics.Web.Controllers
             }
             catch (Exception e)
             {
-                // TODO notify user
+                ModelState.AddModelError(string.Empty, e.Message);
+
                 return View();
             }
         }
@@ -73,11 +69,7 @@ namespace SalesStatistics.Web.Controllers
             return View();
         }
 
-        // POST: Manager/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public ActionResult Edit([Bind(Include = "Id,LastName")] ManagerViewModel managerViewModel)
         {
@@ -94,7 +86,8 @@ namespace SalesStatistics.Web.Controllers
             }
             catch (Exception e)
             {
-                // TODO notify user
+                ModelState.AddModelError(string.Empty, e.Message);
+
                 return View();
             }
         }
@@ -108,7 +101,6 @@ namespace SalesStatistics.Web.Controllers
 
         // POST: Manager/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -120,7 +112,9 @@ namespace SalesStatistics.Web.Controllers
             }
             catch (Exception e)
             {
-                return RedirectToAction("Index");
+                ModelState.AddModelError(string.Empty, e.Message);
+
+                return View();
             }
         }
 
