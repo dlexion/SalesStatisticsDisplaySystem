@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AutoMapper;
-using SalesStatistics.DataTransferObjects;
-using SalesStatistics.DAL;
 using SalesStatistics.DAL.AutoMapperSetup;
-using SalesStatistics.Web.Models.ViewModels;
+using SalesStatistics.Web.AutoMapperSetup;
 
 namespace SalesStatistics.Web
 {
@@ -24,11 +18,8 @@ namespace SalesStatistics.Web
 
             Mapper.Initialize(x =>
             {
-                x.CreateMap<ManagerViewModel, ManagerDTO>();
-                x.CreateMap<ManagerDTO, ManagerViewModel>();
-
-                // Profile with mapping entities to DTO and vice versa
                 x.AddProfile<AutoMapperDalProfile>();
+                x.AddProfile<AutoMapperWebProfile>();
             });
         }
     }
