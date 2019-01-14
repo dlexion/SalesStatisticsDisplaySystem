@@ -66,10 +66,19 @@ namespace SalesStatistics.Web.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
-            int newId = id ?? default(int);
-            var item = Mapper.Map<ManagerViewModel>(_service.GetManagerById(newId));
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
 
-            return View(item);
+            int newId = id ?? default(int);
+            var manager = Mapper.Map<ManagerViewModel>(_service.GetManagerById(newId));
+
+            if (manager == null)
+            {
+                return HttpNotFound();
+            }
+            return View(manager);
         }
 
         [HttpPost]
@@ -91,7 +100,7 @@ namespace SalesStatistics.Web.Controllers
             {
                 ModelState.AddModelError(string.Empty, e.Message);
 
-                return View();
+                return View(managerViewModel);
             }
         }
 
